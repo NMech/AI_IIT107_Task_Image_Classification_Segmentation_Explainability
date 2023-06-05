@@ -1,0 +1,31 @@
+{
+    "gnd_clf": [
+        {
+            "max_depth": 12,
+            "max_features": "auto",
+            "n_estimators": 50
+        },
+        0.7132129032258063
+    ],
+    "pol_svm": [
+        {
+            "C": 0.1,
+            "loss": "hinge"
+        },
+        0.6954709677419355
+    ],
+    "lin_svm": [
+        {
+            "C": 1.0,
+            "loss": "squared_hinge"
+        },
+        0.7307741935483871
+    ],
+    "rbf_svm": [
+        {
+            "C": 1.0,
+            "gamma": "auto"
+        },
+        0.673058064516129
+    ]
+}
