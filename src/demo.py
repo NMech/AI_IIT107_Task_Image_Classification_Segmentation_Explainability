@@ -134,17 +134,19 @@ for image in images_assessed:
 #%%
 # Display the original image
 plt.figure(figsize=(8, 8))
-plt.subplot(1, 2, 1)
-plt.imshow(benign_images_masks, cmap='gray')
+plt.subplot(1, 3, 1)
+plt.imshow(malignant_images[0], cmap='gray')
+plt.title('Original Image')
+
+plt.subplot(1, 3, 2)
+plt.imshow(malignant_images_masks[0], cmap='gray')
 plt.title('Original Image mask')
 
-# =============================================================================
-# # Display the predicted mask
-# plt.subplot(1, 2, 2)
-# plt.imshow(images[3][:, :, 0], cmap='gray')
-# plt.title('Predicted Mask')
-# 
-# =============================================================================
+# Display the predicted mask
+plt.subplot(1, 3, 3)
+plt.imshow(images[2], cmap='gray')
+plt.title('Predicted Mask')
+
 plt.show()
 
 

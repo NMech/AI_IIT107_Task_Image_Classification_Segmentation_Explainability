@@ -44,7 +44,7 @@ dataset_malignant_path = rf"{root_directory}/../dataset/ml_segmentation/malignan
 fig_filepath           = rf"{root_directory}/../Report/Figures/ml_segmentation"
 model_filepath         = rf"{root_directory}/../models/ml_segmentation"
 res_filepath           = rf"{root_directory}/../results/ml_segmentation"
-plotDiagrams      = False
+plotDiagrams      = True
 saveDiagrams      = True
 RunModelSelection = True # True only for choosing the final model hyperparameters (Time consuming)
 

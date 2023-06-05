@@ -41,7 +41,7 @@ dataset_malignant_path = rf"{root_directory}/../dataset/initial/malignant/"
 fig_filepath           = rf"{root_directory}/../Report/Figures/dl_segmentation"
 model_filepath         = rf"{root_directory}/../models/dl_segmentation"
 res_filepath           = rf"{root_directory}/../results/dl_segmentation"
-plotDiagrams           = True
+plotDiagrams           = False
 saveDiagrams           = True
 
 # Set the image and model parameters
@@ -262,10 +262,11 @@ plt.subplot(1, 4, 2)
 plt.imshow(predicted_mask[:, :, 0], cmap='gray')
 plt.title('Pred_mask')
 
+#%%
 # Display the predicted mask
 plt.subplot(1, 4, 3)
 plt.imshow(cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY), cmap='gray')
-plt.title('orig')
+plt.title('orig_image')
 
 # Explainability
 sample_index = np.random.randint(0, len(test_dataset_images))
@@ -325,5 +326,5 @@ superimposed_img = array_to_img(superimposed_img)
 # Display the Grad CAM
 plt.subplot(1, 4, 4)
 plt.imshow(superimposed_img)
-plt.title('explain')
+plt.title('explained')
 plt.show()

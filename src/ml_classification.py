@@ -50,7 +50,7 @@ fig_filepath           = rf"{root_directory}/../Report/Figures/ml_classification
 model_filepath         = rf"{root_directory}/../models/ml_classification"
 res_filepath           = rf"{root_directory}/../results/ml_classification"
 plotDiagrams      = True
-saveDiagrams      = True
+saveDiagrams      = False
 RunModelSelection = False # True only for choosing the final model hyperparameters (Time consuming)
 
 HOG_features       = True
@@ -88,6 +88,14 @@ normal_images    = resize_images(normal_images, image_dimensions)
 benign_images    = resize_images(benign_images, image_dimensions)
 malignant_images = resize_images(malignant_images, image_dimensions)
 print("Images Resizing Done")
+
+#%%
+###############################################################################
+############################### Baseline Accuracy #############################
+###############################################################################
+with open(rf"{res_filepath}/baseline.dat","w") as fileOut:
+    fileOut.write(f"baseline_accuracy = {round((max(len(normal_images), len(benign_images), len(malignant_images))/total_num_of_images)*100, 2)}%")
+
     
 #%%
 ###############################################################################
@@ -152,6 +160,7 @@ if LBP_features:
 
 #%%
 num_of_features = len(normal_images_features[0])
+ 
 print("Number of features = ", num_of_features)
 with open(rf"{res_filepath}/num_of_features.dat","w") as fileOut:
     str = f"Num_of_features: {num_of_features}"
@@ -346,4 +355,3 @@ if plotDiagrams == True:
                                           labels=["normal","benign","malignant"],
                                           cMap="default",Rotations=[0.,0.],
                                           savePlot=[saveDiagrams,fig_filepath,"Confusion_Matrix"]) 
-

@@ -57,6 +57,12 @@ benign_images    = read_images(dataset_benign_path)
 malignant_images = read_images(dataset_malignant_path)
 print("Images reading Done")
 #%%
+#baseline_accuracy
+baseline_accuracy = max(len(normal_images),len( benign_images), len(malignant_images)) / float(len(normal_images)+len( benign_images)+len(malignant_images))
+with open(rf"{res_filepath}/baseline_accuracy.dat","w") as fileOut:
+    str = f"baseline_accuracy: {baseline_accuracy}"
+    fileOut.write(str)
+#%%
 print("Images Resizing Began")
 normal_images    = resize_images(normal_images, image_size)
 benign_images    = resize_images(benign_images, image_size)
@@ -110,13 +116,6 @@ print("Benign Train Images After Augmentation: ", len(train_benign_images))
 print("Malignant Train Images After Augmentation: ", len(train_malignant_images))
 
 print("Augment Training Data Done")
-
-#%%
-#baseline_accuracy
-baseline_accuracy = max(len(train_normal_images),len( train_benign_images), len(train_malignant_images)) / float(len(train_normal_images)+len( train_benign_images)+len(train_malignant_images))
-with open(rf"{res_filepath}/baseline_accuracy.dat","w") as fileOut:
-    str = f"baseline_accuracy: {baseline_accuracy}"
-    fileOut.write(str)
 
 #%%
 train_normal_labels    = [0] * len(train_normal_images)
@@ -241,7 +240,6 @@ sample_index = np.random.randint(0, len(test_dataset_images))
 image = test_dataset_images[sample_index]
 image = image.astype('double')
 
-#%%
 explainer = lime_image.LimeImageExplainer()
 
 # Explain the image using LIME
@@ -251,14 +249,12 @@ explanation = explainer.explain_instance(image = image, classifier_fn = predict_
 top_label = explanation.top_labels[0]
 explanation_img, mask = explanation.get_image_and_mask(top_label, positive_only=False, num_features=5, hide_rest=False)
 
-#%%
 explanation_img = explanation_img.astype(np.float32)
 explanation_img = cv2.cvtColor(explanation_img, cv2.COLOR_BGR2GRAY)
 explanation_img = explanation_img.astype(np.double)
 # Overlay the mask on the original image
 image_with_mask = mark_boundaries(explanation_img / 255.0, mask, color = (1,0,0))
 
-#%%
 image = image.astype(np.float32)
 
 # Plot the original image
